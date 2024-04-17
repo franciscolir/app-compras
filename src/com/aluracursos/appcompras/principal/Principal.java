@@ -11,54 +11,37 @@ public class Principal {
     public static void main(String[] args) {
 
         Scanner teclado = new Scanner(System.in);
-        TarjetaCredito tarjetaCredito = new TarjetaCredito();
-        System.out.println("Ingrese limite de tarjeta");
-        tarjetaCredito.setSaldoTarjeta(teclado.nextInt());
-        System.out.println("Este es el saldo " + tarjetaCredito.getSaldoTarjeta());
-        Compra compra = new Compra();
+        System.out.println("Escriba el límite de la tarjeta: ");
+        double limiteDeCompra = teclado.nextDouble();
+        TarjetaCredito tarjeta = new TarjetaCredito(limiteDeCompra);
 
+        int salir = 1;
+        while(salir != 0) {
+            System.out.println("Escriba la descripción de la compra:");
+            String descripcion = teclado.next();
 
-        for (int i = 0; i < 1; ) {
+            System.out.println("Escriba el valor de la compra:");
+            double valor = Double.valueOf(teclado.next());
 
-           compra.setNumeroDeOpcion(1);
-            System.out.println("numero de opcion antes del if" + compra.numeroDeOpcion);
-            if (compra.getNumeroDeOpcion() == 1) {
-                System.out.println("Ingrese descripcion de la compra");
-                compra.setArticulo(teclado.next());
-                System.out.println("Ingrese valor de la compra");
-                compra.setPrecio(teclado.nextInt());
-                compra.sumaDeCompras();
-                tarjetaCredito.setSaldoTarjeta(tarjetaCredito.getSaldoTarjeta() - compra.getPrecio());
+            Compra compra = new Compra(descripcion, valor);
+            boolean compraRealizada = tarjeta.lanzarCompra(compra);
 
-                ArrayList<Compra> lista= new ArrayList<>();
-
-               // lista.add(miPelicula);
-               // lista.add(otraPelicula);
-                //lista.add(peliculaDeEjemplo);
-                //lista.add(casaDragon);
-
-
-                if (compra.getTotalDeCompra() > tarjetaCredito.getSaldoTarjeta()) {
-                    System.out.println("Excede maximo");
-                } else {
-                    System.out.println("Suma de compras " + compra.getTotalDeCompra());
-                    System.out.println("Este es el saldo " + tarjetaCredito.getSaldoTarjeta());
-                    System.out.println("Compra Realizada!");
-                    System.out.println("Escriba 0 para salir o 1 para continuar");
-                    compra.setNumeroDeOpcion(teclado.nextInt());
-                    System.out.println("numero de opcion en else " + compra.getNumeroDeOpcion());
-                }
-            } else if (compra.getNumeroDeOpcion() == 0) {
-                i = 1;
+            if (compraRealizada) {
+                System.out.println("Compra realizada!");
+                System.out.println("Escriba 0 para salir o 1 para continuar");
+                salir = teclado.nextInt();
             } else {
-                //System.out.println("Ingrese opcion valida");
-                //numeroDeOpcion (teclado.nextInt());
-
+                System.out.println("Saldo insuficiente!");
+                salir = 0;
             }
-
-            System.out.println("Muchas gracias");
-
-
         }
+        System.out.println("***********************");
+        System.out.println("COMPRAS REALIZADAS:\n");
+        for (Compra compra : tarjeta.getListaDeCompra()) {
+            System.out.println(compra.getDescripcion() + " - " +compra.getValor());
+        }
+        System.out.println("\n***********************");
+        System.out.println("\nSaldo de la tarjeta: " +tarjeta.getSaldoTarjeta());
+
 
     }}

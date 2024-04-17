@@ -1,53 +1,26 @@
 package com.aluracursos.appcompras.modelos;
 
-public class Compra extends TarjetaCredito {
+public class Compra  {
 
-private String articulo;
-private int precio;
-private int totalDeCompra = 0;
-    public int numeroDeOpcion = 1;
+private String descripcion;
+private double valor;
 
-
-    public int getNumeroDeOpcion() {
-        return numeroDeOpcion;
+    public Compra(String descripcion, double valor) {
+        this.descripcion = descripcion;
+        this.valor = valor;
     }
 
-    public void setNumeroDeOpcion(int numeroDeOpcion) {
-        this.numeroDeOpcion = numeroDeOpcion;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-
-
-    public void sumaDeCompras (){
-    totalDeCompra += precio;
-   }
-
-    public int getTotalDeCompra() {
-        return totalDeCompra;
+    public double getValor() {
+        return valor;
     }
 
-    public void setTotalDeCompra(int totalDeCompra) {
-        this.totalDeCompra = totalDeCompra;
-    }
-
-
-    public String getArticulo() {
-        return articulo;
-    }
-
-    public void setArticulo(String articulo) {
-        this.articulo = articulo;
-    }
-
-    public int getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(int precio) {
-        this.precio = precio;
-    }
-
-
-    public void numeroDeOpcion(int i) {
+    @Override
+    public String toString() {
+        return "Compra: valor=" + valor +
+                ",descripcion=" + descripcion;
     }
 }
