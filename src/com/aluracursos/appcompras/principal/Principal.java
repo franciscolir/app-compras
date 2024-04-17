@@ -28,6 +28,9 @@ public class Principal {
 
             if (compraRealizada) {
                 System.out.println("Compra realizada!");
+                if(tarjeta.getSaldoTarjeta() == 0) {
+                    System.out.println("Haz alcanzado el limte de Compra.");
+                }
                 System.out.println("Escriba 0 para salir o 1 para continuar");
                 salir = teclado.nextInt();
             } else {

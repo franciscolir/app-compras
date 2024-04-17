@@ -1,6 +1,6 @@
 package com.aluracursos.appcompras.modelos;
 
-public class Compra  {
+public class Compra implements Comparable<Compra> {
 
 private String descripcion;
 private double valor;
@@ -22,5 +22,10 @@ private double valor;
     public String toString() {
         return "Compra: valor=" + valor +
                 ",descripcion=" + descripcion;
+    }
+
+    @Override
+    public int compareTo(Compra otraCompra) {
+        return Double.valueOf(this.valor).compareTo(Double.valueOf(otraCompra.getValor()));
     }
 }
